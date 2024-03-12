@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:preferences_app/providers/theme_provider.dart';
 import 'package:preferences_app/share_preferences/preferences.dart';
 import 'package:preferences_app/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
 
@@ -33,6 +35,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: const Text('Darkmode'),
                 onChanged: (value){
                   Preferences.isDarkmode = value;
+                  final themeProvider = Provider.of<ThemeProvider>(context,listen:false);
+
+                  value ? themeProvider.setDarkMode() : themeProvider.setLightMode();
                   setState(() {});
                 }
               ),
